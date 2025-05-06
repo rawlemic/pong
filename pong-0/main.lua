@@ -20,6 +20,10 @@
     modern systems.
 ]]
 
+if arg[2] == "debug" then
+    require("lldebugger").start()
+end
+
 WINDOW_WIDTH = 1280
 WINDOW_HEIGHT = 720
 

@@ -1,0 +1,42 @@
+// {
+//     "version": "0.2.0",
+//     "configurations": [
+//         {
+//             "name": "Launch Love2D",
+//             "type": "lua",
+//             "request": "launch",
+//             "program": "${workspaceFolder}/main.lua",
+//             "args": ["."],
+//             "runtimeExecutable": "C:\\Users\\rawle\\source\\repos\\LOVE\\love.exe"
+//         }
+//     ]
+// }
+
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "lua-local",
+            "request": "launch",
+            "name": "Debug",
+            "program": {
+                "command": "love"
+            },
+            "args": [
+                ".",
+                "debug"
+            ],
+        },
+        {
+            "type": "lua-local",
+            "request": "launch",
+            "name": "Release",
+            "program": {
+                "command": "love"
+            },
+            "args": [
+                ".",
+            ],
+        },
+    ]
+}
