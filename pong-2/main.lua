@@ -101,3 +101,13 @@ function love.draw()
     -- end rendering at virtual resolution
     push:apply('end')
 end
+
+local love_errorhandler = love.errorhandler
+
+function love.errorhandler(msg)
+    if lldebugger then
+        error(msg, 2)
+    else
+        return love_errorhandler(msg)
+    end
+end

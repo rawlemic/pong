@@ -16,7 +16,7 @@
 
     This version is built to more closely resemble the NES than
     the original Pong machines or the Atari 2600 in terms of
-    resolution, though in widescreen (16:9) so it looks nicer on 
+    resolution, though in widescreen (16:9) so it looks nicer on
     modern systems.
 ]]
 
@@ -48,4 +48,14 @@ function love.draw()
         WINDOW_HEIGHT / 2 - 6,  -- starting Y (halfway down the screen)
         WINDOW_WIDTH,           -- number of pixels to center within (the entire screen here)
         'center')               -- alignment mode, can be 'center', 'left', or 'right'
+end
+
+local love_errorhandler = love.errorhandler
+
+function love.errorhandler(msg)
+    if lldebugger then
+        error(msg, 2)
+    else
+        return love_errorhandler(msg)
+    end
 end
