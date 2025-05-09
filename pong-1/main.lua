@@ -36,6 +36,8 @@ WINDOW_HEIGHT = 720
 
 VIRTUAL_WIDTH = 432
 VIRTUAL_HEIGHT = 243
+-- VIRTUAL_WIDTH = 640
+-- VIRTUAL_HEIGHT = 480
 
 --[[
     Runs when the game first starts up, only once; used to initialize the game.

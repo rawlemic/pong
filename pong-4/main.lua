@@ -16,9 +16,12 @@
 
     This version is built to more closely resemble the NES than
     the original Pong machines or the Atari 2600 in terms of
-    resolution, though in widescreen (16:9) so it looks nicer on 
+    resolution, though in widescreen (16:9) so it looks nicer on
     modern systems.
 ]]
+if arg[2] == "debug" then
+    require("lldebugger").start()
+end
 
 -- push is a library that will allow us to draw our game at a virtual
 -- resolution, instead of however large our window is; used to provide
@@ -30,8 +33,8 @@ push = require 'push'
 WINDOW_WIDTH = 1280
 WINDOW_HEIGHT = 720
 
-VIRTUAL_WIDTH = 432
-VIRTUAL_HEIGHT = 243
+VIRTUAL_WIDTH = 320
+VIRTUAL_HEIGHT = 240
 
 -- speed at which we will move our paddle; multiplied by dt in update
 PADDLE_SPEED = 200
@@ -78,7 +81,7 @@ function love.load()
 end
 
 --[[
-    Runs every frame, with "dt" passed in, our delta in seconds 
+    Runs every frame, with "dt" passed in, our delta in seconds
     since the last frame, which LÖVE2D supplies us.
 ]]
 function love.update(dt)
@@ -114,7 +117,7 @@ function love.update(dt)
 end
 
 --[[
-    Keyboard handling, called by LÖVE2D each frame; 
+    Keyboard handling, called by LÖVE2D each frame;
     passes in the key we pressed so we can access.
 ]]
 function love.keypressed(key)
@@ -129,7 +132,7 @@ function love.keypressed(key)
             gameState = 'play'
         else
             gameState = 'start'
-            
+
             -- start ball's position in the middle of the screen
             ballX = VIRTUAL_WIDTH / 2 - 2
             ballY = VIRTUAL_HEIGHT / 2 - 2
@@ -144,7 +147,7 @@ function love.keypressed(key)
 end
 
 --[[
-    Called after update by LÖVE2D, used to draw anything to the screen, 
+    Called after update by LÖVE2D, used to draw anything to the screen,
     updated or otherwise.
 ]]
 function love.draw()
@@ -175,4 +178,14 @@ function love.draw()
 
     -- end rendering at virtual resolution
     push:apply('end')
+end
+
+local love_errorhandler = love.errorhandler
+
+function love.errorhandler(msg)
+    if lldebugger then
+        error(msg, 2)
+    else
+        return love_errorhandler(msg)
+    end
 end
